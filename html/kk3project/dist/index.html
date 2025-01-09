@@ -1,0 +1,5 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width,initial-scale=1"/><script src="./dist/md5.min.js"></script><link href="./dist/style.css" rel="stylesheet"><title>Учет работы</title><script defer="defer" src="./dist/main.js"></script><link href="./dist/main.css" rel="stylesheet"></head><body><script>function createLayer(e){if(!document.getElementById(e)){const n=document.createElement("div");n.id=e,document.body.appendChild(n),window.renderReactComponent(e)}}</script> <?
+        $loadMain = 2;
+        if ($_SESSION['login'] != "login" and $loadMain != 1) echo "<script>window.onload = function() {createLayer('loginLayer')}</script>";
+        if ($_SESSION['login'] == "login" or $loadMain == 1) echo "<script>window.onload = function() {window.renderReactComponent('menu_box')}</script>";
+    ?> </body></html>

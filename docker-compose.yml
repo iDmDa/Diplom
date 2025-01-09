@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  apache:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: apache_server
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/var/www/html
+      - ./apache-config:/etc/apache2/sites-enabled
+      - ./php.ini:/usr/local/etc/php/php.ini
+    environment:
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
+    networks:
+      - internal
+    restart: always
+
+  mysql:
+    image: mysql:5.5
+    container_name: mysql_server
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepassword
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+    networks:
+      - internal
+    restart: always
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  mysql_data:

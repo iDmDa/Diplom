@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="%PUBLIC_URL%/md5.min.js"></script>
+    <link href="%PUBLIC_URL%/style.css" rel="stylesheet">
+
+    <title>Авторизация</title>
+</head>
+
+<body>
+    <script>
+        function createLayer(id) {
+          if (!document.getElementById(id)) {
+            const div = document.createElement('div');
+            div.id = id;
+            document.body.appendChild(div);
+            // Вызов функции из React-приложения
+            window.renderReactComponent(id);
+          }
+        }
+    </script>
+    <?
+        $loadMain = 1;
+        if ($_SESSION['login'] != "login" and $loadMain != 1) echo "<script>window.onload = function() {createLayer('loginLayer')}</script>";
+        if ($_SESSION['login'] == "login" or $loadMain == 1) echo "<script>window.onload = function() {window.renderReactComponent('menu_box')}</script>";
+    ?>
+</body>
+
+</html>
